@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodetrial-deployment
+  labels:
+    app: nodejsservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejsservices
+  template:
+    metadata:
+      labels:
+        app: nodejsservices
+    spec:
+      containers:
+      - name: nodeserver
+        image: additlabs/nodejsservices:master
+        ports:
+        - containerPort: 3000
