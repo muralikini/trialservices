@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/hi',function(req,res){
-    res.send('{"response":"Hi Everyone, Hope everything is fine"}');
+    res.send('{"response":"Hi Everyone, Hope everything is fine and all is well"}');
 })
 
 app.get('/ready',function(req,res){
