@@ -51,19 +51,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deployment:      
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@master
-        - name: kubectl - Google Cloud GKE cluster.
-          uses: muralikini/trialservices@master
-          env:
-            PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-            APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-            CLUSTER_NAME: ${{ secrets.KUBE_CLUSTER_NAME }}
-            ZONE_NAME: ${{ secrets.KUBE_CLUSTER_ZONE }}
-          with:
-            args: apply -f k8s/
+  
     
          
    
