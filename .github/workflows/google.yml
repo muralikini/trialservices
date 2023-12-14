@@ -1,13 +1,9 @@
-name: Docker Image CI CD
-
+name: Docker Build Deploy
 on:
   push:
-    branches:
-      - '*'   
-  pull_request:
-    branches:
-      - '*'
-env:  
+    branches: [master]
+  workflow_dispatch:
+env:
   REGISTRY: docker.io
   GITREPO: ${{secrets.DOCKERHUB_REPO_NAME }}
   IMAGE_NAME: ${{secrets.DOCKERHUB_USERNAME }}
@@ -17,11 +13,9 @@ env:
   CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS }}
   CLUSTERNAME: ${{secrets.KUBE_CLUSTER_NAME }}
   CLUSTERZONE: ${{secrets.KUBE_CLUSTER_ZONE }}
-  
 jobs:
-  build:
+  create-user-image:
     runs-on: ubuntu-latest
-  
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -50,8 +44,18 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  
-    
-         
-   
+          
+  deployment:
+    needs: [create-user-image]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: kubectl - Google Cloud GKE cluster.
+        uses: ameydev/gke-kubectl-action@master
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLUSTER_NAME: ${{ secrets.KUBE_CLUSTER_NAME }}
+          ZONE_NAME: ${{secrets.KUBE_CLUSTER_ZONE }}
+        with:
+          args: apply -f k8s/
