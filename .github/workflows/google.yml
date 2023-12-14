@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: kubectl - Google Cloud GKE cluster.
-        uses: muralikini/trialservices@master
+        uses: ameydev/gke-kubectl-action@master
         env:
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
