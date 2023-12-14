@@ -9,7 +9,7 @@ on:
       - '*'
 env:  
   REGISTRY: docker.io
-  GITREPO: ${{secrets.DOCKERHUB_REPO_NAME }}
+  GITREPO: nodejsservices
   IMAGE_NAME: ${{secrets.DOCKERHUB_USERNAME }}
   DOCKERUSER: ${{secrets.DOCKERHUB_USERNAME }}
   DOCKERPASSWORD: ${{secrets.DOCKERHUB_PASSWORD }}
