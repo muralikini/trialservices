@@ -14,9 +14,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    
-
     - uses: google-github-actions/auth@v2
+
+
       with:
         service_account: 'speechtotext@voicetotext-379213.iam.gserviceaccount.com'
         credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
@@ -34,26 +34,9 @@ jobs:
       env:
         # GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         GIT_TAG: v0.1.0
-        SRC_IMG_1: $IMAGE_NAME:latest
-        DEST_IMG_1: gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        DEST_IMG_2: gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
 
     - name: Push Docker Image to Artifact Registry
-      run: |-
-        echo $SRC_IMG_1
-        echo $DEST_IMG_1
-        echo $DEST_IMG_2        
-        docker image list        
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        docker image list
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-        docker image list
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-
-       
-
-
+      run: "# echo $SRC_IMG_1\n# echo $DEST_IMG_1\n# echo $DEST_IMG_2      \n   #magic___^_^___line\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n# docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n# docker image list\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line"
 #   # - name: Push Docker Image to Container Registry (GCR)
 #   env:
 #     # GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
