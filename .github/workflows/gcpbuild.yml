@@ -50,6 +50,8 @@ jobs:
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
 
+        docker image list
+
 
 #   # - name: Push Docker Image to Container Registry (GCR)
 #   env:
