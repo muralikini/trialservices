@@ -34,10 +34,11 @@ jobs:
       env:
         # GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         GIT_TAG: v0.1.0
-
     # - name: Push Docker Image to Artifact Registry
     #   run: "# echo $SRC_IMG_1\n# echo $DEST_IMG_1\n# echo $DEST_IMG_2      \n   #magic___^_^___line\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n# docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n# docker image list\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line"
-    - name: Push Docker Image to Container Registry (GCR)
+    - name: Push Docker Image to Artifact Registry
+      # - name: Push Docker Image to Artifact Registry
+      #   run: "# echo $SRC_IMG_1\n# echo $DEST_IMG_1\n# echo $DEST_IMG_2      \n   #magic___^_^___line\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n# docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n# docker image list\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line"
       run: |-
         docker tag $IMAGE_NAME:latest us-central1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         docker tag $IMAGE_NAME:latest us-central1-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$v0.1.0
