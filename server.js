@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello from Node.js microservice!, WOW How do you feel Now?');
+  res.send('Hello from Node.js microservice! for testing?');
 });
 
 app.get('/hi',function(req,res){
