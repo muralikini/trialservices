@@ -49,6 +49,7 @@ jobs:
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest 
         ls ./k8s
         # deploy container image to GKE
+        kubectl apply -f ./k8s/deployment.yml
      
         
     
