@@ -20,8 +20,8 @@ jobs:
         with:
           service_account: 'speechtotext@voicetotext-379213.iam.gserviceaccount.com'
           credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-          install_components: 'gke-gcloud-auth-plugin'
-          export_default_credentials: true
+          #install_components: 'gke-gcloud-auth-plugin'
+          #export_default_credentials: true
 
       - name: Build Docker Image
         run: |-
