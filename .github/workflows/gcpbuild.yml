@@ -33,7 +33,7 @@ jobs:
         # GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         GIT_TAG: v0.1.0
     - name: Push Docker Image to Artifact Registry
-      run: "docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME/env:latest\n"
+      run: "docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n#docker push gcr.io/$PROJECT_ID/$IMAGE_NAME/env:latest\n"
         #docker image list
         #docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         #docker image list
