@@ -47,13 +47,13 @@ jobs:
           #fi       \n#gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV:latest\n
           docker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest 
-          ls ./k8s
+          #ls ./k8s
         # deploy container image to GKE
       - name: deploy to gke
         run: |-
           gcloud container clusters get-credentials devcluster --region us-central1 --project voicetotext-379213
           sudo find / -name gke-gcloud-auth-plugin
-       #   kubectl apply -f ./k8s/deployment.yml
+          kubectl apply -f ./k8s/deployment.yml
 
 
 
