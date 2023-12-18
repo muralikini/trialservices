@@ -34,11 +34,12 @@ jobs:
         GIT_TAG: v0.1.0
     - name: Push Docker Image to Artifact Registry
       run:
+        docker image list
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker image list
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-        docker image list
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-        docker cp gcr.io/$PROJECT_ID/$IMAGE_NAME:latest gcr.io/$PROJECT_ID/env/production/$IMAGE_NAME:latest
+        #docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
+        #docker image list
+        #docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        #docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
+        #docker cp gcr.io/$PROJECT_ID/$IMAGE_NAME:latest gcr.io/$PROJECT_ID/env/production/$IMAGE_NAME:latest
      
