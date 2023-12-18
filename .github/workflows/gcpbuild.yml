@@ -39,19 +39,9 @@ jobs:
       run: |-      
        docker image list
        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-       gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV/image:*
+       gcloud artifacts docker images delete gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
        docker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-       docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
-       
-       #docker push gcr.io/$PROJECT_ID/$IMAGE_NAME/env:latest\n"
-       # "docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n#docker push gcr.io/$PROJECT_ID/$IMAGE_NAME/env:latest\n"
-        #docker image list
-        #docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        #docker image list
-        #docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-        #docker image list
-        #docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        #docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-        #docker cp gcr.io/$PROJECT_ID/$IMAGE_NAME:latest gcr.io/$PROJECT_ID/env/production/$IMAGE_NAME:latest
+       docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      
+        
      
