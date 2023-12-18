@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: trialservices
+      IMAGE_NAME_ENV: trialservices_env
       PROJECT_ID: voicetotext-379213
     steps:
     - name: Checkout
@@ -23,26 +24,16 @@ jobs:
         export_default_credentials: true
 
     - name: Build Docker Image
-      run: docker build -t $IMAGE_NAME:latest .
+      run: |-
+        docker build -t $IMAGE_NAME:latest .
+        docker build -t $IMAGE_NAME_ENV:latest .
 
     - name: Configure Docker Client
       run: |-
         gcloud auth configure-docker --quiet
         gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
-
-
       env:
-        GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
-        # GIT_TAG: v0.1.0
+        # GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        GIT_TAG: v0.1.0
     - name: Push Docker Image to Artifact Registry
-      # - name: Push Docker Image to Artifact Registry voicetotext-379213
-      run: docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest docker image list docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0 docker image list docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-      # - name: Push Docker Image to Artifact Registry
-
-#   run: "# echo $SRC_IMG_1\n# echo $DEST_IMG_1\n# echo $DEST_IMG_2      \n   #magic___^_^___line\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n# docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n# docker image list\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line\n   #magic___^_^___line"
-# run: |-
-#   echo $GIT_TAG
-#   docker tag $IMAGE_NAME:latest us-docker.pkg.dev/voicetotext-379213/gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-#   docker tag $IMAGE_NAME:latest us-docker.pkg.dev/voicetotext-379213/gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
-#   docker push us-docker.pkg.dev/voicetotext-379213/gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-#   docker push us-docker.pkg.dev/voicetotext-379213/gcr.io/$PROJECT_ID/$IMAGE_NAME:v0.1.0
+      run: "docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n#gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest\n#gcloud artifacts docker images list us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV > output.txt\n #magic___^_^___line\n#grep -q \"\" output.txt\n#if [[ $? -eq 0 ]]; then\n gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest\n#fi       \n#gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV:latest\ndocker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      \ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      \n #magic___^_^___line\n #magic___^_^___line"
