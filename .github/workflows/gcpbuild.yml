@@ -52,5 +52,4 @@ jobs:
         gcloud container clusters get-credentials devcluster --region us-central1 --project voicetotext-379213
         kubectl run trialservice2-service --image=gcr.io/voicetotext-379213/trialservices_env:latest
         kubectl expose pod trialservice2-service --port=3000
-        #magic___^_^___line\n 
-        #magic___^_^___line"
+        
