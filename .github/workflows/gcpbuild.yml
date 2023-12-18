@@ -36,4 +36,21 @@ jobs:
         # GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         GIT_TAG: v0.1.0
     - name: Push Docker Image to Artifact Registry
-      run: "docker image list\ndocker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest\n#gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest\n#gcloud artifacts docker images list us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV > output.txt\n #magic___^_^___line\n#grep -q \"\" output.txt\n#if [[ $? -eq 0 ]]; then\n gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest\n#fi       \n#gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV:latest\ndocker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      \ndocker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      \n #magic___^_^___line\n #magic___^_^___line"
+      run: |-
+        docker image list
+        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        #gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest
+        #gcloud artifacts docker images list us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV > output.txt 
+        #magic___^_^___line\n#grep -q \"\" output.txt\n#if [[ $? -eq 0 ]]; then
+        gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest
+        #fi       \n#gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV:latest\n
+        docker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
+        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
+    - name: Deploy to Kubernetes service
+      run: |-
+        kubectl run trialservice2 \
+        --image=gcr.io/voicetotext-379213/trialservices_env:latest
+        
+        #magic___^_^___line\n 
+        #magic___^_^___line"
