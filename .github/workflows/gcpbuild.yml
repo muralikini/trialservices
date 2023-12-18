@@ -47,6 +47,8 @@ jobs:
         #fi       \n#gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV:latest\n
         docker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest 
+
+        kubectl get svc
     
         
         
