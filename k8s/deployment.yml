@@ -1,21 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodetrial-deployment
-  labels:
-    app: nodejsservices
+  name: trialservices
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: nodejsservices
+      app: trialservices
   template:
     metadata:
       labels:
-        app: nodejsservices
+        app: trialservices
     spec:
       containers:
-      - name: nodeserver
-        image: additlabs/nodejsservices:master
+      - name: trialservices_env
+        image: gcr.io/voicetotext-379213/trialservices_env:latest
         ports:
         - containerPort: 3000
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "1"
