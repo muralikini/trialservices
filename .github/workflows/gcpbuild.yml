@@ -40,12 +40,12 @@ jobs:
        docker image list
        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-      
-       gcloud artifacts docker images list us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest > output.txt
-       grep -q "" output.txt
-       if [[ $? -eq 0 ]]; then
-        gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest
-       fi       
+       gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest
+       #gcloud artifacts docker images list us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest > output.txt
+       #grep -q "" output.txt
+       #if [[ $? -eq 0 ]]; then
+       # gcloud artifacts docker images delete us-docker.pkg.dev/$PROJECT_ID/gcr.io/$IMAGE_NAME_ENV:latest
+       #fi       
        #gcloud artifacts docker images delete LOCATION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME_ENV:latest
        docker tag $IMAGE_NAME_ENV:latest gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      
        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME_ENV:latest      
